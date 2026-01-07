@@ -2,7 +2,7 @@ import express from "express"
 import openai from "../express.js"
 
 const router = express.Router();
-
+// Test if connection works later implement the whole logic 
 
 router.get("/ai-health", async (req,res)=>{
     
@@ -10,7 +10,7 @@ router.get("/ai-health", async (req,res)=>{
     
     const response = await openai.responses.create({
       model: "gpt-4o-mini",
-      input: "Selam , kopegim biraz isal olmus bunu evde gecirmenin basit yontemleri nelerdir veterine gitmeden once "
+      input: "Can you hear me ?"
     });
 
     console.log(response);
