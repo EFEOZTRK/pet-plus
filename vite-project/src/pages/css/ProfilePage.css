@@ -1,0 +1,414 @@
+/* PAGE */
+.profile-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* LAYOUT */
+.profile-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+}
+
+/* LEFT SIDEBAR */
+.profile-sidebar {
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.profile-avatar {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-sidebar h3 {
+  margin: 0.5rem 0 0.25rem;
+  color: #2e7d32;
+}
+
+.profile-email {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 1.25rem;
+}
+
+/* STATS */
+.profile-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 1.5rem 0;
+}
+
+.profile-stats div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.profile-stats strong {
+  font-size: 1.2rem;
+  color: #2e7d32;
+}
+
+.profile-stats span {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* RIGHT PANEL */
+.profile-main {
+  padding: 1.5rem;
+  min-height: 300px;
+}
+
+/* TABS */
+.profile-tabs {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 1rem;
+}
+
+.profile-tabs button {
+  background: none;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  font-weight: 600;
+  color: #777;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.profile-tabs button.active {
+  color: #2e7d32;
+  border-bottom-color: #2e7d32;
+}
+
+/* CONTENT */
+.profile-content {
+  padding-top: 1rem;
+}
+
+/* EMPTY / PLACEHOLDER */
+.profile-content .empty-state {
+  color: #777;
+  font-size: 0.95rem;
+}
+
+/* PROFILE INFO COMPONENT'S CSS */
+
+.profile-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.form-group input {
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 0.90rem;
+}
+
+.password-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 0.6rem 0.75rem;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #2e7d32;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.save-button{
+  width: 50%;
+  padding: 0.75em 2rem;
+  background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.phone-and-area {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.phone-and-area select{
+  padding: 0.50rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  width: 80px;
+}
+.phone-and-area input {
+  flex: 1;
+  min-width: 0;
+}
+
+.server-message{
+  font-size: 16.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: green;
+  height: 40px;
+}
+
+.error{
+  color: red;
+}
+
+/* CHANGE PASSWORD OVERLAY */
+/* =========================
+   OVERLAY
+========================= */
+
+.confirm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.hide-overlay {
+  display: none;
+}
+
+/* =========================
+   MODAL BOX
+========================= */
+
+.confirm-box {
+  background: #fff;
+  width: 360px;
+  padding: 32px 28px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  text-align: center;
+  animation: scaleIn 0.2s ease-in-out;
+}
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+.confirm-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.confirm-close-btn:hover {
+  opacity: 0.7;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.confirm-message {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+/* =========================
+   PASSWORD FORM
+========================= */
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.password-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.password-form label {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.password-form input {
+  border: 1px solid #ddd;
+  padding: 9px 10px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.password-form input:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.15);
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.confirm-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Update (Green) */
+.confirm-yes {
+  padding: 9px 18px;
+  background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.confirm-yes:hover {
+  background: linear-gradient(135deg, #43a047 0%, #1b5e20 100%);
+}
+
+.confirm-yes:active {
+  transform: scale(0.97);
+}
+
+/* Cancel */
+.confirm-no {
+  padding: 9px 18px;
+  background: #f0f0f0;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.15s;
+}
+
+.confirm-no:hover {
+  background: #e1e1e1;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* UPLOAD PROFILE PICTURE OVERLAY */
+.avatar-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Show overlay on hover */
+.profile-avatar:hover .avatar-overlay {
+  opacity: 1;
+}
+
+/* Edit icon */
+.edit-icon {
+  color: white;
+  font-size: 1.8rem;
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-sidebar {
+    padding: 1.5rem;
+  }
+
+  .profile-stats {
+    justify-content: space-evenly;
+  }
+}
+
+/* Media for Profile info component  */
+@media (max-width: 768px) {
+  .profile-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

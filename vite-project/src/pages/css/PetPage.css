@@ -1,0 +1,423 @@
+.profile-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.profile-header h2 {
+  color: #2e7d32;
+  font-size: 2rem;
+}
+
+/* Premium Warning */
+.premium-warning {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, #fff3cd 0%, #fff8e1 100%);
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  border-left: 4px solid #ffd700;
+}
+
+.warning-icon {
+  font-size: 2.5rem;
+}
+
+.premium-warning h4 {
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+}
+
+.premium-warning p {
+  color: #616161;
+  font-size: 0.95rem;
+}
+
+/* Add Pet Form */
+.add-pet-form {
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+.hide{
+  display: none;
+}
+
+.add-pet-form h3 {
+  color: #2e7d32;
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.vaccine-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #f0f0f0;
+}
+
+.vaccine-section h4 {
+  color: #2e7d32;
+  margin-bottom: 1rem;
+}
+
+.vaccine-list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.vaccine-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: #e8f5e9;
+  border-radius: 10px;
+  color: #2e7d32;
+}
+
+.remove-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: #ff5252;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.remove-btn:hover {
+  background: #d32f2f;
+  transform: scale(1.1);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Pets Grid */
+.pets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.pet-card {
+  padding: 1rem;
+  transition: all 0.3s;
+}
+
+/* Pet card action buttons (add/delete ) */
+.card-actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: #f5f5f5;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+}
+
+.icon-btn:hover {
+  background: #ececec;
+}
+/* Pet card action buttons (add/delete ) */
+
+.pet-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.pet-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  margin: 0 auto 1rem;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.pet-card h3 {
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.pet-species {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pet-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+.detail-label {
+  color: #757575;
+  font-weight: 600;
+}
+
+.detail-value {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.pet-vaccines {
+  padding-top: 1rem;
+  border-top: 2px solid #f0f0f0;
+}
+
+.pet-vaccines h4 {
+  color: #2e7d32;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.vaccine-badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Empty State */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.empty-icon {
+  font-size: 5rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  color: #2e7d32;
+  margin-bottom: 0.75rem;
+}
+
+.empty-state p {
+  color: #757575;
+  font-size: 1.1rem;
+}
+
+.server-message{
+  font-size: 17.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  color: red;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  animation-name: messageAnimation  ;
+  animation-duration: 0.4s;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/*For Confirmation Box */
+
+.confirm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.529);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Main modal box */
+.confirm-box {
+  background: #fff;
+  width: 320px;
+  padding: 24px 20px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  position: relative;
+  text-align: center;
+  animation: scaleIn 0.2s ease-in-out;
+}
+
+.hide-overlay{
+  display: none;
+}
+
+/* Close button (top right) */
+.confirm-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.confirm-close-btn:hover {
+  opacity: 0.7;
+}
+
+/* Message text */
+.confirm-message {
+  font-size: 16px;
+  font-weight: 500;
+  color: #444;
+  margin: 20px 0;
+}
+
+/* Button container */
+.confirm-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* YES (Delete) button */
+.confirm-yes {
+  padding: 8px 16px;
+  background: #D9534F; /* bootstrap danger red */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.confirm-yes:hover {
+  background: #c64542;
+}
+
+/* NO (Cancel) Button */
+.confirm-no {
+  padding: 8px 16px;
+  background: #f0f0f0;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.confirm-no:hover {
+  background: #e1e1e1;
+}
+
+
+
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.94);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/*For Confirmation Box */
+
+
+
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 1rem;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .premium-warning {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .pets-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
