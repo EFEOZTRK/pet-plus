@@ -5,6 +5,8 @@ import AuthContext from "../context/AuthContext"
 import { useNavigate } from 'react-router-dom';
 import petLogo from "../assets/pet-logo.png"
 import { CgProfile } from "react-icons/cg";
+import { FaHome } from "react-icons/fa";
+
 
 
 function Navigation({}) {

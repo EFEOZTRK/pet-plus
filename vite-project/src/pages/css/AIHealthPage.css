@@ -1,6 +1,6 @@
 .ai-health-page {
-  min-height: 100vh;
   background: #f5f5f5;
+  min-height: 100vh;
 }
 
 .ai-health-container {
@@ -9,356 +9,211 @@
   padding: 2rem;
 }
 
-.ai-content {
-  display: grid;
-  grid-template-columns: 450px 1fr;
-  gap: 2rem;
+.page-header {
+  margin-bottom: 2rem;
 }
 
-/* Upload Section */
+.page-desc {
+  color: #777;
+}
+
+/* GRID */
+.ai-content {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* LEFT */
 .upload-section {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.upload-section .card {
+/* RIGHT */
+.results-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* CARDS */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+/* FILE UPLOAD */
+.file-upload {
+  margin: 1rem 0;
+  border: 2px dashed #4caf50;
+  border-radius: 12px;
+  text-align: center;
   padding: 2rem;
 }
 
-.upload-section h3 {
-  color: #2e7d32;
-  margin-bottom: 1.5rem;
-}
-
-/* AI Model Select */
-.ai-model-select {
-  margin-bottom: 1.5rem;
-}
-
-.premium-note {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: #757575;
-}
-
-.premium-link {
-  color: #ffd700;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.premium-link:hover {
-  color: #ffed4e;
-}
-
-/* File Upload */
 .uploaded-preview {
-  width: 100%;
-  max-height: 300px;
+  max-height: 200px;
   object-fit: contain;
-  border-radius: 12px;
+}
+
+.file-upload input {
+  display: none;
+}
+
+.file-upload label {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .upload-icon {
-  font-size: 3rem;
-  display: block;
-  margin-bottom: 1rem;
+  font-size: 2rem;
 }
 
-.upload-text {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #2e7d32;
-  margin-bottom: 0.5rem;
+/* BUTTONS */
+.btn-primary {
+  background: linear-gradient(135deg,#4caf50,#2e7d32);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 25px;
+  cursor: pointer;
 }
 
-.upload-hint {
-  font-size: 0.9rem;
-  color: #757575;
+.btn-secondary {
+  background: transparent;
+  border: 1px solid #ddd;
+  color: #666;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
 }
+
 
 .upload-actions {
   display: flex;
   gap: 1rem;
-  margin-top: 1.5rem;
 }
 
-/* Info Card */
-.info-card {
-  padding: 1.5rem;
-  background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%);
-}
-
-.info-card h4 {
-  color: #2e7d32;
-  margin-bottom: 1rem;
-}
-
-.info-list {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 1.5rem;
-}
-
-.info-list li {
-  padding: 0.75rem 0;
-  padding-left: 1.5rem;
-  position: relative;
-  color: #616161;
-}
-
-.info-list li:before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: #4caf50;
-  font-weight: 700;
-}
-
-.info-warning {
-  display: flex;
-  gap: 0.75rem;
-  padding: 1rem;
-  background: #fff3cd;
-  border-radius: 8px;
-  border-left: 3px solid #ffa000;
-}
-
-.info-warning span {
-  font-size: 1.5rem;
-}
-
-.info-warning p {
-  color: #616161;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-/* Results Section */
-.results-section {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Analyzing Card */
-.analyzing-card {
-  padding: 4rem 2rem;
-  text-align: center;
-}
-
-.analyzing-card h3 {
-  color: #2e7d32;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.analyzing-card p {
-  color: #757575;
-}
-
-/* Analysis Result */
-.analysis-result {
-  padding: 2rem;
-}
-
-.result-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #f0f0f0;
-}
-
-.result-header h3 {
-  color: #2e7d32;
-}
-
-.result-badge {
-  padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
-  color: white;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.result-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: #f9f9f9;
-  border-radius: 12px;
-}
-
-.info-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.info-label {
-  font-weight: 600;
-  color: #757575;
-}
-
-.status-badge {
-  padding: 0.35rem 0.75rem;
-  border-radius: 15px;
-  font-weight: 700;
-  font-size: 0.9rem;
-}
-
-.status-good {
-  background: #e8f5e9;
-  color: #2e7d32;
-}
-
-/* Findings */
-.findings-section {
-  margin-bottom: 1.5rem;
-}
-
-.findings-section h4 {
-  color: #2e7d32;
-  margin-bottom: 1rem;
-}
-
-.finding-item {
-  padding: 1rem;
-  margin-bottom: 0.75rem;
-  border-radius: 12px;
-  border-left: 4px solid;
-}
-
-.finding-positive {
-  background: #e8f5e9;
-  border-color: #4caf50;
-}
-
-.finding-neutral {
-  background: #e3f2fd;
-  border-color: #2196f3;
-}
-
-.finding-negative {
-  background: #ffebee;
-  border-color: #f44336;
-}
-
-.finding-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.finding-icon {
-  font-size: 1.2rem;
-}
-
-.finding-item strong {
-  color: #2e7d32;
-}
-
-.finding-item p {
-  color: #616161;
-  margin-left: 1.7rem;
-  line-height: 1.5;
-}
-
-/* Recommendations */
-.recommendations-section {
-  margin-bottom: 1.5rem;
-}
-
-.recommendations-section h4 {
-  color: #2e7d32;
-  margin-bottom: 1rem;
-}
-
-.recommendations-list {
-  list-style: none;
-  padding: 0;
-}
-
-.recommendations-list li {
-  padding: 0.75rem;
-  padding-left: 2rem;
-  position: relative;
-  color: #616161;
-  background: #f9f9f9;
-  margin-bottom: 0.5rem;
-  border-radius: 8px;
-}
-
-.recommendations-list li:before {
-  content: '💡';
-  position: absolute;
-  left: 0.75rem;
-}
-
-/* Warning Section */
-.warning-section {
-  display: flex;
-  gap: 0.75rem;
-  padding: 1rem;
-  background: #fff3cd;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  border-left: 3px solid #ffa000;
-}
-
-.warning-icon {
-  font-size: 1.5rem;
-}
-
-.warning-section p {
-  color: #616161;
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-/* Empty Results */
+/* EMPTY */
 .empty-results {
-  padding: 4rem 2rem;
   text-align: center;
+  padding: 3rem;
+  color: #777;
 }
 
 .empty-icon {
-  font-size: 5rem;
-  display: block;
-  margin-bottom: 1rem;
-  opacity: 0.5;
+  font-size: 3rem;
 }
 
-.empty-results h3 {
+/* CHAT */
+.chat-panel {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+}
+
+.chat-header {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.chat-bubble {
+  max-width: 75%;
+  padding: 0.75rem 1rem;
+  border-radius: 16px;
+  font-size: 0.9rem;
+}
+
+.chat-bubble.user {
+  align-self: flex-end;
+  background: #4caf50;
+  color: white;
+}
+
+.chat-bubble.assistant {
+  align-self: flex-start;
+  background: #f1f1f1;
+}
+
+.chat-bubble p {
+  margin: 0.5rem 0;
+}
+
+.chat-bubble ul {
+  padding-left: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.chat-bubble li {
+  margin-bottom: 0.3rem;
+}
+
+.chat-bubble strong {
   color: #2e7d32;
+}
+
+
+.chat-input {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+}
+
+.chat-input button {
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  border: none;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+}
+
+.info-card ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 1rem 0;
+}
+
+.info-card li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
   margin-bottom: 0.5rem;
+  color: #555;
 }
 
-.empty-results p {
-  color: #757575;
+.info-card li::before {
+  content: "✔";
+  color: #4caf50;
+  font-size: 0.9rem;
+  margin-top: 2px;
 }
 
-@media (max-width: 1200px) {
+/* RESPONSIVE */
+@media (max-width: 1100px) {
   .ai-content {
     grid-template-columns: 1fr;
   }
 }
-
-@media (max-width: 768px) {
-  .ai-health-container {
-    padding: 1rem;
-  }
-
-  .upload-section .card,
-  .analysis-result {
-    padding: 1.5rem;
-  }
-}
-

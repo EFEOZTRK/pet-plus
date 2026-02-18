@@ -10,6 +10,7 @@ import AIHealthPage from './pages/AIHealthPage';
 import PremiumPage from './pages/PremiumPage';
 import Navigation from './components/Navigation';
 import NotFound from "./pages/NotFound"
+import PasswordUpdate from './components/PasswordChangePopUp/PasswordUpdate'
 import {  Routes, Route, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import AuthContext from './context/AuthContext';
@@ -43,6 +44,7 @@ function App() {
       <Route path='/premium' element={<RouteProtect> <PremiumPage/> </RouteProtect>}/>
       <Route path='/login' element={ <LoginPage/>}/>
       <Route path='/register' element={<RegisterPage/>}/>
+      <Route path='/password-update' element={ <PasswordUpdate/>}/>
       {/* If a user goes to unvalid route then show this perfectly styled NotFound page */}
       <Route path='*' element={ <NotFound/>}/> {/* Dont make it protected it goes crazy */}
     </Routes>

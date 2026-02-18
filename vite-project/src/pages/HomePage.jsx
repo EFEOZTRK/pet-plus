@@ -189,15 +189,15 @@ useEffect(()=>{
               <div className="vet-item">
                 <span className="vet-icon">🏥</span>
                 <div>
-                  <div className="vet-name">Dr. Ahmet Veteriner</div>
-                  <div className="vet-distance">2.5 km</div>
+                  <div className="vet-name">Bemowo. veterinary clinic</div>
+                  <div className="vet-distance">2 km</div>
                 </div>
               </div>
               <div className="vet-item">
                 <span className="vet-icon">🏥</span>
                 <div>
-                  <div className="vet-name">Pet Health Veterinary Clinic</div>
-                  <div className="vet-distance">3.8 km</div>
+                  <div className="vet-name">Veterinary Clinic QWET</div>
+                  <div className="vet-distance">3.5 km</div>
                 </div>
               </div>
             </div>

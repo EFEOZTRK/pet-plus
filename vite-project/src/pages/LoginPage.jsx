@@ -1,26 +1,32 @@
 import { use, useState } from 'react';
 import './css/LoginPage.css';
-import { Link  } from 'react-router-dom';
+import { Link, useSearchParams  } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 import petLogo from "../assets/pet-logo.png"
 import { IoMdCloseCircle } from "react-icons/io";
+import { useEffect } from 'react';
 
 
 
 function LoginPage({}) {
+  const [searchParams] = useSearchParams();
+  const resetSuccess = searchParams.get("reset");
+
   // When user is verified get the result from url params.
   const location = useLocation()
   const navigate = useNavigate()
   const getVerified = new URLSearchParams(location.search)
   let verified = getVerified.get("verified")
 
+
   // UseStates for form
   const [email,setMail] = useState("")
   const [password,setPassword] = useState("")
   const [serverMessage , setServerMessage] = useState("")
+  const [serverMessageState, setServerMessageState] = useState(false);
   const {setUser} = useContext(AuthContext)
 
   // UseStates for forgot my password.
@@ -29,6 +35,15 @@ function LoginPage({}) {
   const [forgotPasswordStatus, setForgotPasswordStatus] = useState(false);
   const [forgotPasswordMessage,setForgotPasswordMessage] = useState("");
   
+  //Password Reset UI
+  useEffect(()=>{
+    if(resetSuccess === "success"){
+      setServerMessageState(true)
+      setServerMessage("Password successfully updated. You can now log in.");
+    }
+  },[])
+
+
   // User login OnSubmit function
   const formSubmitLogin = async (e)=>{
     e.preventDefault()
@@ -150,7 +165,7 @@ function LoginPage({}) {
             </button>
             <p onClick={()=> setShowForgotPassword(true)} className='forgot-password'>Forgot your password ?</p>
             {/* Message returned from server when user triest to login */}
-            <div style={{color: "red"}} className={`server-message  `}>{serverMessage}</div>
+            <div style={{color: `${serverMessageState ? `green` : `red` }`}} className={`server-message  `}>{serverMessage}</div>
 
             {/* Messages when user clicks on the account verification link */}
             {verified == "true" ? <div style={{color: "green"}} className="server-message">You have been verified </div> : "" }

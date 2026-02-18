@@ -1,229 +1,300 @@
-import { useState } from 'react';
-import './css/AIHealthPage.css';
-import Navigation from '../components/Navigation';
+import { useState } from "react";
+import "./css/AiHealthPage.css";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext.jsx";
+import ReactMarkdown from "react-markdown";
 
-function AIHealthPage({}) {
- 
+const AiHealthPage = () => {
+  
+  //Ui states for the image upload
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [uploadError, setUploadError] = useState("");
+  const [imagePreview, setImagePreview] = useState(null);
+  // User message input field state
+  const [message, setMessage] = useState("");
+  // Chat history state for both frontend render and backend chat context
+  const [chatHistory, setChatHistory] = useState([
+  {
+  role: "system",
+  content: `
+  You are a veterinary assistant.
+  Format answers clearly using:
+  - short paragraphs
+  - bullet points
+  - bold section titles
+  Avoid long blocks of text.
+  `
+  },
+  {
+    role: "assistant",
+    content: "Hello! You can ask your questions about your pet here 🐾.."
+  }
+  ]);
+  const [remainingTokens, setRemainingTokens] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  //Setter for uploaded image
+  const handleImageUpload = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  // basic validation
+  if (!file.type.startsWith("image/")) {
+    setUploadError("Please select a valid image");
+    return;
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    setUploadError("The photo cannot be larger than 5MB");
+    return;
+  }
+
+  setUploadError("");
+  setUploadedImage(file);
+  setImagePreview(URL.createObjectURL(file));
+  };
+  // Simple reset function for image upload
+  const resetImage = () => {
+  setUploadedImage(null);
+  setImagePreview(null);
+  };
+  // Setter for user message input
+  const handleInputChange = (e) => {
+  setMessage(e.target.value);
+  };
+
+  // Message send function
+  const handleSendMessage = async () => {
+  const trimmedMessage = message.trim();
+  if (!trimmedMessage && !uploadedImage) return;
+
+  //Update the ui with the user message first.
+    const newUserMessage = {
+    role: "user",
+    content: trimmedMessage || "Please analyze the uploaded photo.",
+    image: uploadedImage || null
+    };
+
+    setChatHistory((prev) => [...prev, newUserMessage]);
+    setMessage("");
+    setLoading(true);
+
+    try {
+    let res;
+
+    // IMAGE EXISTS → FormData
+      const cleanMessages = chatHistory.map(({ role, content }) => ({
+      role,
+      content
+    }));
+
+
+    if (uploadedImage) {
+      const formData = new FormData();
+      formData.append("image", uploadedImage); // actual File
+      formData.append(
+        "messages",
+        JSON.stringify([...cleanMessages, newUserMessage])
+      );
+
+      res = await fetch("http://localhost:3000/ai-health", {
+        method: "POST",
+        credentials: "include",
+        body: formData
+      });
+    }
+    // TEXT ONLY → JSON
+    else {
+      res = await fetch("http://localhost:3000/ai-health", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          messages: [...chatHistory, newUserMessage]
+        })
+      });
+    }
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.msg);
+    }
+
+    setChatHistory((prev) => [
+      ...prev,
+      { role: "assistant", content: data.message }
+    ]);
+
+    setRemainingTokens(data.remainingTokens);
+    setUploadedImage(null); // clear after successful send
+    setImagePreview(null);
+
+  } catch (err) {
+    setChatHistory((prev) => [
+      ...prev,
+      { role: "assistant", content: `⚠️ ${err.message}` }
+    ]);
+  } finally {
+    setLoading(false);
+  }
+  }
+
+  console.log(imagePreview);
+  
 
   return (
     <div className="ai-health-page">
-     
-
       <div className="ai-health-container">
+
+        {/* HEADER */}
         <div className="page-header">
-          <h2>🤖 AI Destekli Sağlık Analizi</h2>
+          <h2>🤖 AI-Powered Health Analysis</h2>
           <p className="page-desc">
-            Evcil hayvanınızın fotoğrafını yükleyerek yapay zeka tabanlı sağlık analizi
-            alın
+            Upload a photo of your pet to get an AI-based health analysis
           </p>
         </div>
 
+        {/* MAIN LAYOUT */}
         <div className="ai-content">
+
+          {/* LEFT PANEL */}
           <div className="upload-section">
-            <div className="card">
-              <h3>Fotoğraf Yükle</h3>
+          <div className="card">
+        <h3>Upload Photo</h3>
 
-              <div className="ai-model-select">
-                <label className="form-label">AI Model Seçimi</label>
-                <select
-                  className="form-select"
-                  // value={aiModel}
-                  // onChange={(e) => setAiModel(e.target.value)}
-                  // disabled={!user.isPremium && aiModel !== 'gpt-3.5'}
-                  data-testid="ai-model-select"
-                >
-                  <option value="gpt-3.5">GPT-3.5 (Ücretsiz)</option>
-                  <option value="gpt-4" > 
-                    GPT-4 (Premium) 
-                  </option>
-                </select>
-                {/* User premium mu diye if else  */}
-                  <p className="premium-note">
-                    🔒 Gelişmiş AI modelleri için{' '}
-                    <span
-                      className="premium-link"
-                    >
-                      premium'a geçin
-                    </span>
-                  </p>
-                {/* User premium mu diye if else  */}
-              </div>
+        <div className="file-upload">
+          <input
+            id="pet-photo-upload"
+            type="file"
+            accept="image/*"
+            onChange={(e) =>handleImageUpload(e)} // you already have this
+          />
 
-              {/* {userPets.length > 0 && ( */}
-                <div className="form-group">
-                  <label className="form-label">Evcil Hayvan Seç (Opsiyonel)</label>
-                  <select
-                    className="form-select"
-                    // value={selectedPet}
-                    // onChange={(e) => setSelectedPet(e.target.value)}
-                    data-testid="pet-select"
-                  >
-                    <option value="">Seçiniz</option>
-                    {/* {userPets.map((pet) => ( */}
-                      <option key="1" value="Pamuk">
-                        Pamuk ('Kopek')
-                      </option>
-                    {/* user petlerine map yapma */}
-                  </select>
-                </div>
-              {/* User peti var mi diye bakma if else */}
+          <label htmlFor="pet-photo-upload">
+            {uploadedImage ? (
+              <img src={imagePreview} alt="preview" className="uploaded-preview" />
+            ) : (
+              <>
+                <span className="upload-icon">📷</span>
+                <span>Upload Photo</span>
+              </>
+            )}
+          </label>
+        </div>
 
-              <div className="file-upload">
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="file-upload-input"
-                  // onChange={handleImageUpload}
-                  data-testid="image-upload-input"
-                />
-                <label className="file-upload-label">
-                  {/* {uploadedImage ? ( */}
-                    <img src="image src" alt="Uploaded" className="uploaded-preview" />
-                   {/* : ( */}
-                    <>
-                      <span className="upload-icon">📷</span>
-                      <div>
-                        <div className="upload-text">Fotoğraf Yükle</div>
-                        <div className="upload-hint">
-                          Tıklayarak veya sürükleyerek fotoğraf yükleyin
-                        </div>
-                      </div>
-                    </>
-                  {/* )} */}
-                </label>
-              </div>
-
-              <div className="upload-actions">
-                {/* {uploadedImage && ( */}
-                  <button
-                    className="btn-secondary"
-                    // onClick={resetAnalysis}
-                    data-testid="reset-btn"
-                  >
-                    Sıfırla
-                  </button>
-                {/* )} */}
-                <button
-                  className="btn-primary btn-full"
-                  // onClick={handleAnalyze}
-                  // disabled={analyzing || !uploadedImage}
-                  data-testid="analyze-btn"
-                >
-                  {/* {analyzing ? 'Analiz Ediliyor...' : '🔍 Analiz Et'} */}
-                </button>
-              </div>
-            </div>
-
-            <div className="card info-card">
-              <h4>💡 Nasıl Çalışır?</h4>
-              <ul className="info-list">
-                <li>Evcil hayvanınızın net bir fotoğrafını çekin</li>
-                <li>Fotoğrafı yukarıdaki alana yükleyin</li>
-                <li>AI modelimiz fotoğrafı analiz edecek</li>
-                <li>Sağlık durumu hakkında rapor alın</li>
-              </ul>
-              <div className="info-warning">
-                <span>⚠️</span>
-                <p>
-                  Bu analiz kesin tanı değildir. Sağlık sorunu için mutlaka veterinere
-                  danışın.
-                </p>
-              </div>
-            </div>
+        {uploadedImage && (
+          <div className="upload-actions">
+            <button
+              className="btn-secondary"
+              onClick={resetImage}
+            >
+              Reset
+            </button>
           </div>
+        )}
+        <div>{uploadError && uploadError}</div>
+      </div>
 
+        <div className="card info-card">
+          <h4>💡 How It Works?</h4>
+          <ul>
+            <li>Upload a clear photo of your pet</li>
+            <li>Ask a question in the chat</li>
+            <li>AI analyzes the photo with your message</li>
+            <li>Review the recommendations</li>
+          </ul>
+
+          <div className="info-warning">
+            ⚠️ This analysis is not a definitive diagnosis.
+            Always consult a veterinarian for health concerns.
+          </div>
+        </div>
+      </div>
+
+          {/* RIGHT PANEL */}
           <div className="results-section">
-            {/* {analyzing && ( */}
-              <div className="card analyzing-card">
-                <div className="spinner"></div>
-                <h3>Fotoğraf Analiz Ediliyor...</h3>
-                <p>Yapay zeka modelimiz fotoğrafınızı inceliyor</p>
-              </div>
-            {/* )} */}
 
-            {/* {analysis && !analyzing && ( */}
-              <div className="card analysis-result">
-                <div className="result-header">
-                  <h3>📊 Analiz Sonucu</h3>
-                  <span className="result-badge">analiz modeli</span>
-                </div>
-
-                <div className="result-info">
-                  <div className="info-row">
-                    <span className="info-label">Tarih:</span>
-                    <span>Analiz saati</span>
-                  </div>
-                  {/* {analysis.petName !== 'Bilinmiyor' && ( */}
-                    <div className="info-row">
-                      <span className="info-label">Evcil Hayvan:</span>
-                      <span>hayvan ismi</span>
-                    </div>
-                  {/* )} */}
-                  <div className="info-row">
-                    <span className="info-label">Sağlık Durumu:</span>
-                    <span className="status-badge status-good">
-                      {/* ✅ {analysis.healthStatus} */}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="findings-section">
-                  <h4>Bulgular</h4>
-                  {/* {analysis.findings.map((finding, idx) => ( */}
-                    <div key="4" className={`finding-item finding-statuleri`}>
-                      <div className="finding-header">
-                        <span className="finding-icon">
-                          {/* {finding.status === 'positive'
-                            ? '✅'
-                            : finding.status === 'neutral'
-                            ? '🔵'
-                            : '⚠️'} */}
-                        </span>
-                        <strong>kategori</strong>
-                      </div>
-                      <p>bulununan sorun aciklamasi</p>
-                    </div>
-                  {/* ))} */}
-                </div>
-
-                <div className="recommendations-section">
-                  <h4>Öneriler</h4>
-                  <ul className="recommendations-list">
-                    {/* {analysis.recommendations.map((rec, idx) => ( */}
-                      <li key="2">rec</li>
-                    {/* ))} */}
-                  </ul>
-                </div>
-
-                <div className="warning-section">
-                  <span className="warning-icon">⚠️</span>
-                  <p>analiz uyarisi</p>
-                </div>
-
-                <button
-                  className="btn-primary btn-full"
-                  // onClick={() => onNavigate('vet-finder')}
-                  data-testid="find-vet-btn"
-                >
-                  🏥 Veteriner Bul
-                </button>
-              </div>
-            {/* )} */}
-
-            {/* {!analyzing && !analysis && ( */}
+            {/* ANALYSIS RESULT
+            {!analysis && !analyzing && (
               <div className="card empty-results">
                 <span className="empty-icon">🔍</span>
                 <h3>Henüz Analiz Yapılmadı</h3>
                 <p>Fotoğraf yükleyip analiz et butonuna tıklayın</p>
               </div>
-            {/* )} */}
+            )} */}
+
+            {/* {analyzing && (
+              <div className="card analyzing-card">
+                <div className="spinner"></div>
+                <h3>Fotoğraf Analiz Ediliyor...</h3>
+              </div>
+            )}
+
+            {analysis && (
+              <div className="card analysis-result">
+                <h3>📊 Analiz Sonucu</h3>
+                <p>Sağlık durumu ve öneriler burada olacak</p>
+                <button className="btn-primary btn-full">
+                  🏥 Veteriner Bul
+                </button>
+              </div>
+            )} */}
+
+            {/* CHAT PANEL */}
+            <div className="card chat-panel">
+              <div className="chat-header">
+                <h3>🤖 AI Chat</h3>
+                {remainingTokens !== null && (
+                  <span className="token-badge">
+                  🪙 {remainingTokens}
+                </span>
+                )}
+              </div>
+
+              <div className="chat-messages">
+                <div className="chat-messages">
+                {chatHistory.filter((f)=> f.role!== "system" ).map((msg, index) => (
+              <div
+                key={index}
+                className={`chat-bubble ${msg.role === "user" ? "user" : "assistant"}`}
+                >
+                  <ReactMarkdown>
+                {msg.content}
+                </ReactMarkdown>
+                </div>
+                ))}
+
+             {loading && (
+                <div className="chat-bubble assistant">
+                 Writing...
+                </div>
+              )}
+                </div>
+              </div>
+
+              <div className="chat-input">
+                <input
+                  type="text"
+                  placeholder={`${ uploadedImage ? "Ask a question about the photo" : "Ask a question about your pet..."}`}
+                  value={message}
+                  onChange={handleInputChange}
+                  onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
+                  />
+
+                  <button onClick={handleSendMessage} disabled={loading}>
+                    {uploadedImage ? "Analyze & Send" : "Send"}
+                  </button>
+                </div>
+
+            </div>
+
           </div>
         </div>
       </div>
     </div>
   );
-}
-
-export default AIHealthPage;
+};
 
 
+export default AiHealthPage;

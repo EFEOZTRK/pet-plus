@@ -8,17 +8,17 @@ function PremiumPage({}) {
   const plans = [
     {
       id: 'monthly',
-      name: 'Aylık',
+      name: 'Montly',
       price: '99',
-      period: 'ay',
+      period: 'month',
       popular: false,
     },
     {
       id: 'yearly',
-      name: 'Yıllık',
+      name: 'Yearly',
       price: '990',
-      period: 'yıl',
-      discount: '%20 İndirim',
+      period: 'year',
+      discount: '%20 Discount',
       popular: true,
     },
   ];
@@ -26,23 +26,23 @@ function PremiumPage({}) {
   const features = [
     {
       icon: '🐾',
-      title: 'Sınırsız Evcil Hayvan',
-      description: 'İstediğiniz kadar evcil hayvan profili oluşturun',
-      free: 'Sadece 1',
-      premium: 'Sınırsız',
+      title: 'Unlimited Pet Profiles',
+      description: 'Create and manage unlimited profiles for all your pets',
+      free: 'Only 1 pet',
+      premium: 'Unlimited',
     },
     {
       icon: '🤖',
-      title: 'Gelişmiş AI Analizi',
-      description: 'GPT-4 ile daha detaylı sağlık analizleri',
+      title: 'Advanced AI Analysis',
+      description: 'More detailed health analysis with GPT-4',
       free: 'GPT-3.5',
       premium: 'GPT-4',
     },
     
     {
       icon: '🔔',
-      title: 'Aşı Hatırlatıcı',
-      description: 'Aşı ve kontrol tarihleri için otomatik bildirimler',
+      title: 'Vaccine & Checkup Reminders',
+      description: 'Automatic reminders for vaccinations and vet visits',
       free: '❌',
       premium: '✅',
     },
@@ -51,7 +51,7 @@ function PremiumPage({}) {
 
   const handleSubscribe = () => {
     alert(
-      'Ödeme sistemi entegrasyonu daha sonra eklenecek. \nSeçilen plan: ' +
+      'Will be added later \nSeçilen plan: ' +
         plans.find((p) => p.id === selectedPlan).name
     );
   };
@@ -64,16 +64,15 @@ function PremiumPage({}) {
         <div className="premium-hero">
           <div className="hero-content">
             <span className="hero-badge">⭐ Premium</span>
-            <h1>Evcil Dostlarınız İçin En İyisi</h1>
+            <h1>The best experience for your pets</h1>
             <p>
-              Premium üyeliğimizle evcil hayvanlarınızın sağlığını daha iyi takip edin ve
-              özel özelliklere erişin
+              Upgrade to PetPlus Premium for unlimited pet profiles, advanced AI health analysis, and exclusive features that give your furry friends the care they deserve!
             </p>
           </div>
         </div>
 
         <div className="plans-section">
-          <h2>🎯 Plan Seçimi</h2>
+          <h2>🎯 Select plan</h2>
           <div className="plans-grid">
             {plans.map((plan) => (
               <div
@@ -84,7 +83,7 @@ function PremiumPage({}) {
                 onClick={() => setSelectedPlan(plan.id)}
                 data-testid={`plan-${plan.id}`}
               >
-                {plan.popular && <div className="popular-badge">En Popüler</div>}
+                {plan.popular && <div className="popular-badge">Most Popular</div>}
                 {plan.discount && <div className="discount-badge">{plan.discount}</div>}
 
                 <h3>{plan.name}</h3>
@@ -107,7 +106,7 @@ function PremiumPage({}) {
         </div>
 
         <div className="features-section">
-          <h2>✨ Premium Özellikler</h2>
+          <h2>✨ Premium Features</h2>
           <div className="features-grid">
             {features.map((feature, idx) => (
               <div key={idx} className="card feature-card">
@@ -116,7 +115,7 @@ function PremiumPage({}) {
                 <p>{feature.description}</p>
                 <div className="feature-comparison">
                   <div className="comparison-item">
-                    <span className="comparison-label">Ücretsiz</span>
+                    <span className="comparison-label">Free</span>
                     <span className="comparison-value free">{feature.free}</span>
                   </div>
                   <div className="comparison-divider"></div>
@@ -132,9 +131,9 @@ function PremiumPage({}) {
 
         <div className="cta-section">
           <div className="card cta-card">
-            <h2>🚀 Hemen Başlayın!</h2>
+            <h2>🚀 Start Now!</h2>
             <p>
-              Seçtiğiniz plan:{' '}
+              Selected plan:{' '}
               <strong>{plans.find((p) => p.id === selectedPlan).name}</strong>
             </p>
             <div className="cta-price">
@@ -150,10 +149,10 @@ function PremiumPage({}) {
               onClick={handleSubscribe}
               data-testid="subscribe-btn"
             >
-              ⭐ Premium'a Geç
+              ⭐ Switch to Premium
             </button>
             <p className="cta-note">
-              🔒 Güvenli ödeme | ❌ İstediğiniz zaman iptal edin
+              🔒 Secure payment | ❌ Cancel anytime
             </p>
           </div>
         </div>

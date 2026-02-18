@@ -128,8 +128,9 @@ function VetFinderPage() {
         <div className="vet-content">
 
           
+          {vets.length > 0 ? 
           <div className="vet-list-section">
-            {vets.map((vet) => (
+            {vets.length > 0 && vets.map((vet) => (
               <div
                 key={vet.place_id}
                 className={`card vet-card ${selectedVet?.id === vet.id ? 'selected' : ''}`}
@@ -174,7 +175,7 @@ function VetFinderPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </div> : <div className="empty-vets">We are looking for vets close to your location.</div>}
 
           <div className="map-section">
   <div className="card map-card">
