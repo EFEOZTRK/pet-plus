@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 
 
+
 const schema = new mongoose.Schema({
     nameSurname: String,
     email: {type: String, required: true , unique: true},
@@ -8,10 +9,13 @@ const schema = new mongoose.Schema({
     phone: {type: String, default: ""},
     profileImage: { url: {type: String, default: ""} , publicId:{type: String, default: ""} },
     isPremium: Boolean,
+    chatGptTokens: {type: Number, default: 2000},
     isVerified: {type: Boolean , default: false},
     verifyToken: String,
-    resetPasswordToken: String,
+    resetPasswordToken: {type: String},
+    resetPasswordExpire: {type: Date} ,
     pets:[{type: mongoose.Schema.Types.ObjectId, ref:"Pet"}],
+    isVeterinarian: {type: Boolean, default: false},
 
     
 },{timestamps: true})

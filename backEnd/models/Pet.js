@@ -17,6 +17,13 @@ const schema = new mongoose.Schema({
 
         }
     ],
+    medicalHistory: [
+        {
+            condition: String,
+            date: Date,
+            notes: String
+        }
+    ],   
 },{timestamps: true})
 
 

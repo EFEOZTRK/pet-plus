@@ -24,7 +24,7 @@ router.get("/verify", async (req,res)=>{
         await user.save();
 
         // Redirect to login page with a success message to be used on that page.
-        return res.redirect("http://localhost:5173/login?verified=true")
+        return res.redirect(`${process.env.CLIENT_URL}/login?verified=true`)
 
     }
     catch(err){

@@ -34,7 +34,7 @@ router.post("/register", async (req,res)=>{
     
 
     // crypt the password
-    const cryptedPassword = await bcrypt.hash(userObj.password.trim(), 10)
+    const cryptedPassword = await bcrypt.hash(userObj.password, 10)
 
     //  create verification url
     const token = crypto.randomBytes(32).toString("hex")
