@@ -95,7 +95,7 @@ const AiHealthPage = () => {
         JSON.stringify([...cleanMessages, newUserMessage])
       );
 
-      res = await fetch("http://localhost:3000/ai-health", {
+      res = await fetch(`${import.meta.env.VITE_API_URL}/ai-health`, {
         method: "POST",
         credentials: "include",
         body: formData
@@ -103,7 +103,7 @@ const AiHealthPage = () => {
     }
     // TEXT ONLY → JSON
     else {
-      res = await fetch("http://localhost:3000/ai-health", {
+      res = await fetch(`${import.meta.env.VITE_API_URL}/ai-health`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

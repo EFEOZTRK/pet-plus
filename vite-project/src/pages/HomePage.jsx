@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import './css/HomePage.css';
-import Navigation from '../components/Navigation';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
-import Jake from "../assets/jake.jpg"
 
 // NEXT TIME WILL BE IMPLEMENTING PET PROFILE PICTURE UPDATES.
 // FORGOT PASSWORD FOR THE LOGIN PAGE
@@ -28,10 +26,10 @@ useEffect(()=>{
         <aside className="sidebar-left">
           <div className="card profile-summary">
             <div className="profile-avatar">
-              <img src={user.profileImage?.url || Jake } alt="Profile" />
+              <img src={user.profileImage?.url} alt="Profile" />
             </div>
             <h3>{user.nameSurname ?? "Guest" }</h3>
-            <p className="profile-email">{user.email ?? "example@gmail.com"}</p>
+            <p className="profile-email">{user.email}</p>
             
             {/* Burdaki yine premiumlar icin if else */}
               {user.isPremium && 

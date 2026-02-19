@@ -49,7 +49,7 @@ function LoginPage({}) {
     e.preventDefault()
     const userObj = {email:email,password:password};
 
-    await fetch("http://localhost:3000/login",{
+    await fetch(`${import.meta.env.VITE_API_URL}/login`,{
       method: "POST",
       headers: {"Content-Type": "application/json"},
       credentials: 'include',
@@ -76,7 +76,7 @@ function LoginPage({}) {
     const userMail = forgotEmail?.trim(); //trim empty space
     if(!userMail){ setForgotPasswordStatus(false); setForgotPasswordMessage("Email field can not be empty!"); return; }
 
-    await fetch("http://localhost:3000/forgot-password",{
+    await fetch(`${import.meta.env.VITE_API_URL}/forgot-password`,{
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({email: userMail})

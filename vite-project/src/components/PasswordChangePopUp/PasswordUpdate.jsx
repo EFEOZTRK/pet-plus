@@ -32,7 +32,7 @@ function PasswordUpdate() {
     return
     }
 
-    await fetch(`http://localhost:3000/update-password?token=${token}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/update-password?token=${token}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password }),

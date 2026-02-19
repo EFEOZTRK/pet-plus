@@ -2,7 +2,6 @@ import { useState } from "react"
 import { useContext } from "react"
 import AuthContext from "../context/AuthContext"
 import "./css/ProfilePage.css"
-import Jake from "../assets/jake.jpg"
 import { IoMdCloseCircle } from "react-icons/io";
 import { MdOutlineEdit } from "react-icons/md";
 
@@ -46,7 +45,7 @@ const ProfilePage = ()=>{
       const repeat = userPasswords.repeatPassword?.trim();
 
       if(current && newPass && newPass === repeat){
-        await fetch("http://localhost:3000/change-password",{
+        await fetch(`${import.meta.env.VITE_API_URL}/change-password`,{
           method: "PATCH",
           credentials: "include",
           headers: {"Content-Type": "application/json"},
@@ -81,7 +80,7 @@ const ProfilePage = ()=>{
       const formData = new FormData();
       formData.append("avatar", file);
 
-      await fetch("http://localhost:3000/upload-profile-picture",{
+      await fetch(`${import.meta.env.VITE_API_URL}/upload-profile-picture`,{
         method: "PATCH",
         credentials: "include",
         body: formData

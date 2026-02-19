@@ -72,7 +72,7 @@ function VetFinderPage() {
     lng: userLocation.lng,
   };
 
-  fetch("http://localhost:3000/vets", {
+  fetch(`${import.meta.env.VITE_API_URL}/vets`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userLocation),

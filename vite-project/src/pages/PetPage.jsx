@@ -131,7 +131,7 @@ function PetPage({  }) {
 
     if(!petToDelete) return alert("Please select a pet to delete")
     
-      await fetch(`http://localhost:3000/delete-pet/${petToDelete}`,{
+      await fetch(`${import.meta.env.VITE_API_URL}/delete-pet/${petToDelete}`,{
       method: "DELETE",
       credentials: "include",
       headers: {"Content-Type": "application/json"},
@@ -200,7 +200,7 @@ function PetPage({  }) {
     // Updating function if isEditing is true
     if(isEditing){
 
-      await fetch(`http://localhost:3000/edit-pet/${selectedPet._id}`,{
+      await fetch(`${import.meta.env.VITE_API_URL}/edit-pet/${selectedPet._id}`,{
         method: "PUT",
         credentials: "include",
         headers: {"Content-Type": "application/json"},
@@ -232,7 +232,7 @@ function PetPage({  }) {
     }
 
 
-    await fetch("http://localhost:3000/add-pet", {
+    await fetch(`${import.meta.env.VITE_API_URL}/add-pet`, {
       method: "POST",
       credentials: "include",
       headers: {"Content-Type": "application/json"},
