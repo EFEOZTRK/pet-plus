@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./css/AiHealthPage.css";
+import "./css/AIHealthPage.css";
 import ReactMarkdown from "react-markdown";
 
 const AiHealthPage = () => {
