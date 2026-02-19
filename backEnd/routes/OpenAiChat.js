@@ -14,15 +14,11 @@ router.post("/ai-health",AuthVerifier, upload.single("image"), async (req,res)=>
     try {
       const user = req.user;
 
-      const tokens = await UserSchema
-        .findById(user.id)
-        .select("chatGptTokens");
+      const tokens = await UserSchema.findById(user.id).select("chatGptTokens");
 
       // Insufficient tokens
       if (tokens.chatGptTokens <= 0) {
-        return res
-          .status(403)
-          .json({ success: false, msg: "Insufficient tokens" });
+        return res.status(403).json({ success: false, msg: "Insufficient tokens" });
       }
 
       // Parse messages (JSON or FormData)
@@ -32,13 +28,14 @@ router.post("/ai-health",AuthVerifier, upload.single("image"), async (req,res)=>
           : req.body.messages;
 
       if (!Array.isArray(messages) || messages.length < 1) {
-        return res
-          .status(400)
-          .json({ success: false, msg: "No messages provided" });
+        return res.status(400).json({ success: false, msg: "No messages provided" });
       }
 
-      // Build OpenAI input
-      let openAiInput = messages;
+      // Sanitized user messages
+      let openAiInput = messages.map(m=>({
+        role: m.role,
+        content: m.content
+      })); 
 
         if (req.file) {
         const base64Image = req.file.buffer.toString("base64");

@@ -1,7 +1,5 @@
 import { useState } from "react";
 import "./css/AiHealthPage.css";
-import { useContext } from "react";
-import AuthContext from "../context/AuthContext.jsx";
 import ReactMarkdown from "react-markdown";
 
 const AiHealthPage = () => {
@@ -72,7 +70,7 @@ const AiHealthPage = () => {
     const newUserMessage = {
     role: "user",
     content: trimmedMessage || "Please analyze the uploaded photo.",
-    image: uploadedImage || null
+    // image: uploadedImage || null
     };
 
     setChatHistory((prev) => [...prev, newUserMessage]);
