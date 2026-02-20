@@ -7,7 +7,7 @@ import cookie from "cookie-parser"
 const router = express.Router()
 
 router.post("/login", async (req,res)=> {
-
+    const isProduction = process.env.NODE_ENV === "production";
     const userObj = req.body;
 
     if(userObj.email && userObj.password){
@@ -34,8 +34,8 @@ router.post("/login", async (req,res)=> {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure : false, // Will be set to true when I host the website (IMPORTANT !!)
-            sameSite: "lax",
+            secure : isProduction, // Will be set to true when I host the website (IMPORTANT !!)
+            sameSite: isProduction ? "none" : "lax", /* Is lax on production */,
             maxAge: 60 * 60 * 1000
         })
         console.log("User logged in");
