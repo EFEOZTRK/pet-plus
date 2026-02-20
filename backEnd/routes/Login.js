@@ -35,7 +35,7 @@ router.post("/login", async (req,res)=> {
         res.cookie("token", token, {
             httpOnly: true,
             secure : isProduction, // Will be set to true when I host the website (IMPORTANT !!)
-            sameSite: isProduction ? "none" : "lax", /* Is lax on production */,
+            sameSite: isProduction ? "none" : "lax", 
             maxAge: 60 * 60 * 1000
         })
         console.log("User logged in");
