@@ -42,13 +42,16 @@
 }
 
 @media (max-width: 1205px) {
+  
   .premium-nav .nav-label{
     display: none;
   }
   
   .nav-label {
     display: none;
-    font-size: larger;
+  }
+  .nav-icon {
+    font-size: 22px;
   }
 
   .nav-links{
@@ -60,7 +63,8 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    padding: 7px;
+    padding: 12px 0;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
   }
 
 }
