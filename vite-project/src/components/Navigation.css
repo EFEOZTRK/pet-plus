@@ -12,6 +12,15 @@
 
 .nav-link{
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-icon{
+  display: flex;
+  align-items: center;
+  font-size: large;
 }
 
 .logo-container{
@@ -30,4 +39,27 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+@media (max-width: 1205px) {
+  .premium-nav .nav-label{
+    display: none;
+  }
+  
+  .nav-label {
+    display: none;
+    font-size: larger;
+  }
+
+  .nav-links{
+    display: flex;
+    justify-content: center;
+    background-color: #f7f9f8;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+
 }

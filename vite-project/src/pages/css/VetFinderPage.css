@@ -284,14 +284,13 @@
 }
 
 
-@media (max-width: 1200px) {
+@media (max-width: 1205px) {
   .vet-content {
     grid-template-columns: 1fr;
   }
 
   .map-section {
-    order: -1;
-    position: sticky;
+    display: none;
   }
 }
 
