@@ -16,6 +16,27 @@ import { MdOutlineEdit } from "react-icons/md";
 
 
 
+const formatDateForInput = (date) => {
+  if (!date) return "";
+  return new Date(date).toISOString().split("T")[0];
+};
+
+const getPetAge = (birthDate) => {
+  if (!birthDate) return "Unknown";
+
+  const birth = new Date(birthDate);
+  const today = new Date();
+
+  let years = today.getFullYear() - birth.getFullYear();
+  const birthdayPassed =
+    today.getMonth() > birth.getMonth() ||
+    (today.getMonth() === birth.getMonth() && today.getDate() >= birth.getDate());
+
+  if (!birthdayPassed) years--;
+
+  return years <= 0 ? "Less than 1" : years;
+};
+
 function PetPage({  }) {
 
   // I NEED TO DO THE DELETE PET BUTTON ON MY NEXT CODING SESSION.
@@ -39,7 +60,7 @@ function PetPage({  }) {
   name: "",
   species: "Köpek",    // default select value
   breed: "",
-  age: "",
+  birthDate: "",
   color: "",
   weight: "",
   vaccines: []
@@ -51,7 +72,7 @@ function PetPage({  }) {
     {name: "",
     species: "Köpek",    // default select value
     breed: "",
-    age: "",
+    birthDate: "",
     color: "",
     weight: "",
     vaccines: []})
@@ -118,7 +139,10 @@ function PetPage({  }) {
   // Fills the form with the to be updated data and isEditing to true.
   const editPet = (pet)=>{
     setSelectedPet(pet);
-    setPetForm(pet)
+    setPetForm({
+      ...pet,
+      birthDate: formatDateForInput(pet.birthDate),
+    })
     setIsEditing(true);
     setShowForm(true);
     
@@ -181,9 +205,14 @@ function PetPage({  }) {
     return;
     }
 
-    // Age
-    if (!petForm.age || petForm.age <= 0) {
-    alert("Age must be greater than zero.");
+    // Birth date
+    if (!petForm.birthDate) {
+    alert("Please select a birth date.");
+    return;
+    }
+
+    if (new Date(petForm.birthDate) > new Date()) {
+    alert("Birth date cannot be in the future.");
     return;
     }
 
@@ -396,15 +425,17 @@ function PetPage({  }) {
               </div>
 
               <div className="form-group">
-                <label className="form-label">Age</label>
+                <label className="form-label">Birth Date</label>
                 <input
                   required
                   onChange={handleChange}
-                  type="number"
-                  name="age"
+                  type="date"
+                  name="birthDate"
                   className="form-input"
-                  value={petForm.age}
-                  data-testid="pet-age-input"
+                  value={petForm.birthDate}
+                  onKeyDown={(e) => e.preventDefault()}
+                  onPaste={(e) => e.preventDefault()}
+                  data-testid="pet-birth-date-input"
                 />
                 {/* value and onChange previously handled by petForm */}
               </div>
@@ -573,7 +604,7 @@ function PetPage({  }) {
               </div>
               <div className="detail-item">
                 <span className="detail-label">Age:</span>
-                <span className="detail-value">{pet.age ?? 0}</span>
+                <span className="detail-value">{getPetAge(pet.birthDate)}</span>
               </div>
               <div className="detail-item">
                 <span className="detail-label">Color:</span>
