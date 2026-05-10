@@ -157,6 +157,78 @@ useEffect(()=>{
                   </button>
                 </div>
               </div>
+
+              <div key="1" className="card post-card">
+  <div className="post-header">
+    <div className="post-user">
+      <span className="user-avatar">🐶</span>
+      <div>
+        <div className="user-name">Efe</div>
+        <div className="post-time">26/12/2025</div>
+      </div>
+    </div>
+    <div className="pet-tag">🐾</div>
+  </div>
+
+  <div className="post-content">
+    <p>Bugün parkta çok koştuk, şimdi tam dinlenme zamanı 😴</p>
+    <img style={{width: "300px", height: "400px"}} src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d" alt="dog" />
+  </div>
+
+  <div className="post-footer">
+    <button className="post-action">❤️ 34</button>
+    <button className="post-action">💬 12</button>
+    <button className="post-action">📤 Share</button>
+  </div>
+</div>
+
+<div key="2" className="card post-card">
+  <div className="post-header">
+    <div className="post-user">
+      <span className="user-avatar">🐱</span>
+      <div>
+        <div className="user-name">Ayşe</div>
+        <div className="post-time">27/12/2025</div>
+      </div>
+    </div>
+    <div className="pet-tag">🐾 Miskin</div>
+  </div>
+
+  <div className="post-content">
+    <p>Günün %90’ı uyuyarak geçti… klasik 😅</p>
+    <img style={{width: "300px", height: "400px"}} src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba" alt="cat" />
+  </div>
+
+  <div className="post-footer">
+    <button className="post-action">❤️ 51</button>
+    <button className="post-action">💬 8</button>
+    <button className="post-action">📤 Share</button>
+  </div>
+</div>
+
+<div key="3" className="card post-card">
+  <div className="post-header">
+    <div className="post-user">
+      <span className="user-avatar">🐕</span>
+      <div>
+        <div className="user-name">Mehmet</div>
+        <div className="post-time">28/12/2025</div>
+      </div>
+    </div>
+    <div className="pet-tag">🐾 Karabas</div>
+  </div>
+
+  <div className="post-content">
+    <p>Topu atmamı beklerkenki sabrı... 😂</p>
+    <img style={{width: "300px", height: "400px"}} src="https://images.unsplash.com/photo-1507146426996-ef05306b995a" alt="dog2" />
+  </div>
+
+  <div className="post-footer">
+    <button className="post-action">❤️ 67</button>
+    <button className="post-action">💬 19</button>
+    <button className="post-action">📤 Share</button>
+  </div>
+</div>
             {/* Postlari mapledigimiz mekan */}
           </div>
         </main>

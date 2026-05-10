@@ -9,6 +9,7 @@ const schema = new mongoose.Schema({
     age: {type: Number, required: true},
     color: {type: String, required: true},
     weight: {type: Number, required: true},
+    petImage: { url: {type: String, default: ""} , publicId:{type: String, default: ""} },
     
     vaccines: [
         {

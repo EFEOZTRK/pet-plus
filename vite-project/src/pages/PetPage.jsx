@@ -12,6 +12,8 @@ import AuthContext from "../context/AuthContext"
 //Import card icons (update/delete)
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { IoMdCloseCircle } from "react-icons/io";
+import { MdOutlineEdit } from "react-icons/md";
+
 
 
 function PetPage({  }) {
@@ -256,6 +258,45 @@ function PetPage({  }) {
     
 
   }
+
+  // Max size of the pet profile image
+  const MAX_SIZE_MB = 5;
+
+  // Pet picure function.
+  const handleProfileImageChange = async(e,_id) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+        alert("Image must be smaller than 5MB");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("avatar", file);
+      formData.append("petId", _id);
+
+      await fetch(`${import.meta.env.VITE_API_URL}/upload-pet-picture`,{
+        method: "PATCH",
+        credentials: "include",
+        body: formData
+      })
+      .then(res=> res.json())
+      .then(data=> {
+        if(data.success){
+          setUser((prev)=> ({
+            ...prev,
+            pets: prev.pets.map((pet)=> 
+              pet._id === _id ? { ...pet, petImage: { url: data.imageUrl } } : pet
+            )
+          }))
+        }else{
+          alert(data.msg)
+        }
+        
+      })
+
+    }
   
   
   
@@ -506,8 +547,21 @@ function PetPage({  }) {
                   </button>
               </div>
 
-            <div className="pet-header">
-              <div className="pet-avatar">🐶</div>
+          <div className="pet-header">
+           <div className="profile-avatar">
+              <img src={pet.petImage.url} alt="Profile" />
+
+            {/* Overlay */}
+            <label className="avatar-overlay">
+              <input
+              type="file"
+              accept="image/*"
+              hidden
+              onChange={(e)=> handleProfileImageChange(e, pet._id)}
+              />
+              <span className="edit-icon"><MdOutlineEdit size={30}/></span>
+            </label>
+           </div>
               <h3>{pet.name ?? "Unknown Pet"}</h3>
               <span className="pet-species">{pet.species ?? "Unknown"}</span>
             </div>

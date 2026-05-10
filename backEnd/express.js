@@ -23,6 +23,7 @@ import DeletePet from "./routes/modifiers/DeletePet.js"
 import EditProfile from "./routes/modifiers/EditProfile.js" 
 import ChangePassword from "./routes/modifiers/ChangePassword.js"
 import ProfilePicture from "./routes/modifiers/ProfilePicture.js"
+import PetPicture from "./routes/modifiers/PetPicture.js"
 import ForgotPassword from "./routes/modifiers/ForgotPassword.js"
 
 // IMPORT FOR AI-CHAT ROUTE
@@ -72,6 +73,7 @@ app.use(DeletePet)
 app.use(EditProfile)
 app.use(ChangePassword)
 app.use(ProfilePicture)
+app.use(PetPicture)
 app.use(ForgotPassword)
 
 app.use(OpenAiChat)
